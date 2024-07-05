@@ -23,6 +23,7 @@ public class SellerDaoJDBC implements SellerDao {
     public SellerDaoJDBC(Connection conn) {
         this.conn = conn;
     }
+    
     @Override
     public void insert(Seller obj) {
     	PreparedStatement st = null;
@@ -31,7 +32,7 @@ public class SellerDaoJDBC implements SellerDao {
     				"INSERT INTO seller "
     				+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
     				+ "VALUES "
-    				+ "(?, ?, ?, ?, ?) ",
+    				+ "(?, ?, ?, ?, ?)",
     				Statement.RETURN_GENERATED_KEYS
     		);
     		st.setString(1, obj.getName());
@@ -69,7 +70,7 @@ public class SellerDaoJDBC implements SellerDao {
     		st = conn.prepareStatement(
     				"UPDATE seller "
     				+ "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
-    				+ "WHERE Id = ? "
+    				+ "WHERE Id = ?"
     		);
     		st.setString(1, obj.getName());
     		st.setString(2, obj.getEmail());
